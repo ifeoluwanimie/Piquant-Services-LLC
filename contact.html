@@ -75,6 +75,7 @@
                 name="phone"
                 type="tel"
                 autocomplete="tel"
+                pattern="[\+0-9\s\-\(\)]{7,}"
                 placeholder="+1 555 123 4567"
               />
             </label>
@@ -86,19 +87,31 @@
 
             <label>
               What do you need help with?
-              <select name="service" required>
+              <select name="service" id="serviceSelect" required>
                 <option value="" selected disabled>Select one</option>
                 <option>Software Development</option>
                 <option>Cloud & DevOps Automation</option>
                 <option>Systems Integration</option>
                 <option>Modernization & Migration</option>
                 <option>Support & Optimization</option>
+                <option value="Other">Other</option>
               </select>
+            </label>
+
+            <label id="otherServiceLabel" style="display: none;">
+              Please describe what you need help with (optional)
+              <input
+                type="text"
+                name="other_service"
+                placeholder="Briefly describe your request"
+              />
             </label>
 
             <label>
               Message
-              <textarea name="message" rows="6" required placeholder="Briefly describe your goals, timeline, and any constraints."></textarea>
+              <textarea
+                name="message" rows="6" required placeholder="Briefly describe your goals, timeline, and any constraints.">
+              </textarea>
             </label>
 
             <!-- Basic anti-spam honeypot -->
