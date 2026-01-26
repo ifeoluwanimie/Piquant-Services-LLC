@@ -82,12 +82,10 @@ a.link:hover{ text-decoration:underline; }
   gap: 10px;
   font-weight:700;
 }
-.brand-mark{
-  width:36px; height:36px;
-  display:grid; place-items:center;
-  background: linear-gradient(135deg, rgba(125,211,252,.25), rgba(167,139,250,.25));
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 12px;
+.brand-logo {
+    height: 40px;
+    width: auto;
+    display: block;
 }
 .brand-text{ letter-spacing:.2px; }
 
