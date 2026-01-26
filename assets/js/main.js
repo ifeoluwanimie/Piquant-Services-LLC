@@ -55,4 +55,19 @@
       main.prepend(banner);
     }
   }
+  // Show "Other" input when selected
+  const serviceSelect = document.getElementById("serviceSelect");
+  const otherServiceLabel = document.getElementById("otherServiceLabel");
+  
+  if (serviceSelect && otherServiceLabel) {
+    serviceSelect.addEventListener("change", () => {
+      if (serviceSelect.value === "Other") {
+        otherServiceLabel.style.display = "grid";
+      } else {
+        otherServiceLabel.style.display = "none";
+        const input = otherServiceLabel.querySelector("input");
+        if (input) input.value = "";
+      }
+    });
+  }
 })();
