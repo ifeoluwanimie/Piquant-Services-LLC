@@ -1,1 +1,4 @@
+User-agent: *
+Allow: /
 
+Sitemap: https://piquantservices.com/sitemap.xml
