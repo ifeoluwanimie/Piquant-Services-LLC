@@ -1,1 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact | Piquant Services LLC</title>
+  <meta name="description" content="Contact Piquant Services LLC to request a consultation for software development, cloud & DevOps, automation, and modernization." />
+  <link rel="canonical" href="https://piquantservices.com/contact.html" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
 
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-elevate>
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Piquant Services Home">
+        <span class="brand-mark" aria-hidden="true">⚡</span>
+        <span class="brand-text">Piquant Services LLC</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="navMenu">
+          <span class="sr-only">Open menu</span>
+          <span aria-hidden="true">☰</span>
+        </button>
+
+        <div id="navMenu" class="nav-menu">
+          <a class="nav-link" href="services.html">Services</a>
+          <a class="nav-link" href="about.html">About</a>
+          <a class="nav-link active" href="contact.html">Contact</a>
+          <a class="nav-link nav-cta" href="contact.html">Request a Consultation</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <h1>Contact</h1>
+        <p class="lead">Tell us what you’re building. We’ll respond within 1 business day.</p>
+        <p class="muted">
+          Prefer email? Use your company email address here:
+          <strong>company email</strong>
+          <span class="hint">(replace this text with your real email on your site)</span>
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid two-col">
+        <div class="card">
+          <h2>Request a consultation</h2>
+
+          <!-- Formspree:
+               1) Create a form at formspree.io
+               2) Replace ACTION_URL with your Formspree endpoint (e.g., https://formspree.io/f/xxxxxxx)
+          -->
+          <form class="form" action="ACTION_URL" method="POST">
+            <label>
+              Full name
+              <input name="name" type="text" autocomplete="name" required />
+            </label>
+
+            <label>
+              Email
+              <input name="email" type="email" autocomplete="email" required />
+            </label>
+
+            <label>
+              Company (optional)
+              <input name="company" type="text" autocomplete="organization" />
+            </label>
+
+            <label>
+              What do you need help with?
+              <select name="service" required>
+                <option value="" selected disabled>Select one</option>
+                <option>Software Development</option>
+                <option>Cloud & DevOps Automation</option>
+                <option>Systems Integration</option>
+                <option>Modernization & Migration</option>
+                <option>Support & Optimization</option>
+              </select>
+            </label>
+
+            <label>
+              Message
+              <textarea name="message" rows="6" required placeholder="Briefly describe your goals, timeline, and any constraints."></textarea>
+            </label>
+
+            <!-- Basic anti-spam honeypot -->
+            <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <!-- Optional: Formspree redirect after submit -->
+            <!-- <input type="hidden" name="_redirect" value="https://piquantservices.com/contact.html?sent=1" /> -->
+
+            <button class="btn btn-primary" type="submit">Send message</button>
+            <p class="muted small">
+              By submitting, you agree to our <a href="privacy.html">Privacy Policy</a>.
+            </p>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2>What happens next</h2>
+          <ol class="steps compact">
+            <li class="step">
+              <h3>We review</h3>
+              <p>We’ll read your message and confirm we understand your goals.</p>
+            </li>
+            <li class="step">
+              <h3>We propose</h3>
+              <p>You’ll get a recommended approach, timeline, and engagement options.</p>
+            </li>
+            <li class="step">
+              <h3>We deliver</h3>
+              <p>We execute with clear milestones and transparent updates.</p>
+            </li>
+          </ol>
+
+          <div class="note">
+            <strong>Tip:</strong> Include your deadline and any must-have requirements to speed things up.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">Piquant Services LLC</div>
+        <div class="muted">Software Development • Cloud & DevOps • Automation</div>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+      <div class="muted footer-copy">
+        © <span id="year"></span> Piquant Services LLC. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
