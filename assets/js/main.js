@@ -55,19 +55,26 @@
       main.prepend(banner);
     }
   }
-  // Show "Other" input when selected
+  // Contact form: preselect a service from ?service=... and show "Other" input when needed.
   const serviceSelect = document.getElementById("serviceSelect");
   const otherServiceLabel = document.getElementById("otherServiceLabel");
-  
+
   if (serviceSelect && otherServiceLabel) {
-    serviceSelect.addEventListener("change", () => {
-      if (serviceSelect.value === "Other") {
-        otherServiceLabel.style.display = "grid";
-      } else {
-        otherServiceLabel.style.display = "none";
-        const input = otherServiceLabel.querySelector("input");
-        if (input) input.value = "";
-      }
-    });
+    const syncOtherField = () => {
+      const input = otherServiceLabel.querySelector("input");
+      const isOther = serviceSelect.value === "Other";
+      otherServiceLabel.style.display = isOther ? "grid" : "none";
+      if (!isOther && input) input.value = "";
+    };
+
+    const requestedService = params.get("service");
+    if (requestedService) {
+      const matchingOption = Array.from(serviceSelect.options)
+        .find((option) => option.value === requestedService || option.text === requestedService);
+      if (matchingOption) serviceSelect.value = matchingOption.value;
+    }
+
+    syncOtherField();
+    serviceSelect.addEventListener("change", syncOtherField);
   }
 })();
