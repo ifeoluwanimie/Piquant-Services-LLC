@@ -353,6 +353,7 @@ h1{
   gap: 12px;
   margin-top: 10px;
 }
+.form [hidden]{ display:none !important; }
 label{ display:grid; gap: 6px; color: var(--muted); font-size: 14px; }
 input, select, textarea{
   width:100%;
@@ -368,6 +369,76 @@ input:focus, select:focus, textarea:focus{
   box-shadow: 0 0 0 4px rgba(125,211,252,.12);
 }
 textarea{ resize: vertical; }
+.form-fieldset{
+  min-width:0;
+  margin:0;
+  padding:0;
+  border:0;
+}
+.form-fieldset legend{
+  padding:0;
+  color:var(--muted);
+  font-size:14px;
+}
+.field-hint{
+  margin:2px 0 8px;
+  color:var(--muted);
+  font-size:12px;
+}
+.service-option-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+.service-option{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  min-width:0;
+  padding:11px 12px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  background:rgba(0,0,0,.14);
+  color:var(--muted);
+  cursor:pointer;
+  transition:border-color .15s ease, background .15s ease, color .15s ease;
+}
+.service-option:hover{
+  border-color:rgba(125,211,252,.32);
+  background:rgba(255,255,255,.055);
+  color:var(--text);
+}
+.service-option:focus-within{
+  border-color:rgba(125,211,252,.55);
+  box-shadow:0 0 0 4px rgba(125,211,252,.12);
+}
+.service-option:has(input:checked){
+  border-color:rgba(125,211,252,.48);
+  background:linear-gradient(135deg,rgba(125,211,252,.13),rgba(167,139,250,.10));
+  color:var(--text);
+}
+.service-option input[type="checkbox"]{
+  flex:0 0 auto;
+  width:18px;
+  height:18px;
+  margin:2px 0 0;
+  padding:0;
+  border-radius:5px;
+  accent-color:#7dd3fc;
+  box-shadow:none;
+}
+.service-option span{ min-width:0; }
+.form-error{
+  margin:8px 0 0;
+  color:#fca5a5;
+  font-size:13px;
+}
+.service-choices[aria-invalid="true"] .service-option-grid{
+  padding:4px;
+  margin:-4px;
+  border-radius:16px;
+  box-shadow:0 0 0 2px rgba(252,165,165,.45);
+}
 .honeypot{ display:none; }
 .note{
   margin-top: 14px;
@@ -406,6 +477,7 @@ textarea{ resize: vertical; }
   }
   .nav-menu.open{ display:flex; }
   .nav-link{ width:100%; }
+  .service-option-grid{ grid-template-columns:1fr; }
 }
 
 

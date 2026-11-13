@@ -39,7 +39,7 @@
   setHeader();
   window.addEventListener("scroll", setHeader, { passive: true });
 
-  // Contact "sent" banner support (if you enable _redirect with ?sent=1)
+  // Contact "sent" banner support after the form's _next redirect.
   const params = new URLSearchParams(location.search);
   if (params.get("sent") === "1") {
     const main = document.getElementById("main");
@@ -55,26 +55,94 @@
       main.prepend(banner);
     }
   }
-  // Contact form: preselect a service from ?service=... and show "Other" input when needed.
-  const serviceSelect = document.getElementById("serviceSelect");
+  // Contact form: support multiple services, query-string preselection, and custom needs.
+  const consultationForm = document.querySelector("form.form");
+  const serviceFieldset = document.getElementById("serviceOptions");
+  const serviceOptions = Array.from(document.querySelectorAll('#serviceOptions input[name="service"]'));
+  const serviceError = document.getElementById("serviceError");
   const otherServiceLabel = document.getElementById("otherServiceLabel");
+  const otherServiceInput = document.getElementById("otherService");
 
-  if (serviceSelect && otherServiceLabel) {
+  if (
+    consultationForm &&
+    serviceFieldset &&
+    serviceOptions.length &&
+    serviceError &&
+    otherServiceLabel &&
+    otherServiceInput
+  ) {
+    const notSureOption = serviceOptions.find((option) => option.hasAttribute("data-exclusive"));
+    const otherOption = serviceOptions.find((option) => option.value === "Other / custom need");
+    let serviceValidationAttempted = false;
+
+    const selectedServices = () => serviceOptions
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+
     const syncOtherField = () => {
-      const input = otherServiceLabel.querySelector("input");
-      const isOther = serviceSelect.value === "Other";
-      otherServiceLabel.style.display = isOther ? "grid" : "none";
-      if (!isOther && input) input.value = "";
+      const isOther = Boolean(otherOption && otherOption.checked);
+      otherServiceLabel.hidden = !isOther;
+      otherServiceInput.disabled = !isOther;
+      otherServiceInput.required = isOther;
+      if (!isOther) otherServiceInput.value = "";
     };
 
-    const requestedService = params.get("service");
-    if (requestedService) {
-      const matchingOption = Array.from(serviceSelect.options)
-        .find((option) => option.value === requestedService || option.text === requestedService);
-      if (matchingOption) serviceSelect.value = matchingOption.value;
+    const syncServiceValidation = () => {
+      const hasSelection = selectedServices().length > 0;
+      serviceOptions[0].setCustomValidity(
+        hasSelection ? "" : "Select at least one service, or choose Not sure yet."
+      );
+      serviceError.hidden = hasSelection || !serviceValidationAttempted;
+
+      if (!hasSelection && serviceValidationAttempted) {
+        serviceFieldset.setAttribute("aria-invalid", "true");
+      } else {
+        serviceFieldset.removeAttribute("aria-invalid");
+      }
+    };
+
+    const syncServiceFields = () => {
+      syncOtherField();
+      syncServiceValidation();
+    };
+
+    const requestedServices = params.getAll("service");
+    requestedServices.forEach((requestedService) => {
+      const normalizedService = requestedService === "Other"
+        ? "Other / custom need"
+        : requestedService;
+      const matchingOption = serviceOptions.find((option) => option.value === normalizedService);
+      if (matchingOption) matchingOption.checked = true;
+    });
+
+    if (notSureOption && notSureOption.checked && selectedServices().length > 1) {
+      notSureOption.checked = false;
     }
 
-    syncOtherField();
-    serviceSelect.addEventListener("change", syncOtherField);
+    serviceOptions.forEach((option) => {
+      option.addEventListener("change", () => {
+        if (option.checked && option === notSureOption) {
+          serviceOptions.forEach((candidate) => {
+            if (candidate !== notSureOption) candidate.checked = false;
+          });
+        } else if (option.checked && notSureOption) {
+          notSureOption.checked = false;
+        }
+
+        syncServiceFields();
+      });
+    });
+
+    serviceOptions[0].addEventListener("invalid", () => {
+      serviceValidationAttempted = true;
+      syncServiceValidation();
+    });
+
+    consultationForm.addEventListener("formdata", (event) => {
+      event.formData.delete("service");
+      event.formData.append("services", selectedServices().join(", "));
+    });
+
+    syncServiceFields();
   }
 })();

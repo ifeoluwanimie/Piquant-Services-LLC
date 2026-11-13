@@ -89,26 +89,68 @@
               <input name="company" type="text" autocomplete="organization" />
             </label>
 
-            <label>
-              What do you need help with?
-              <select name="service" id="serviceSelect" required>
-                <option value="" selected disabled>Select one</option>
-                <option>Software Development</option>
-                <option>Cloud & DevOps Automation</option>
-                <option>Systems Integration</option>
-                <option>Modernization & Migration</option>
-                <option>Support & Optimization</option>
-                <option value="Timekeeper Product">Timekeeper Product</option>
-                <option value="Other">Other</option>
-              </select>
-            </label>
+            <fieldset
+              class="form-fieldset service-choices"
+              id="serviceOptions"
+              aria-describedby="serviceHint serviceError"
+            >
+              <legend>What do you need help with?</legend>
+              <p class="field-hint" id="serviceHint">Select all that apply.</p>
 
-            <label id="otherServiceLabel" style="display: none;">
-              Please describe what you need help with (optional)
+              <div class="service-option-grid">
+                <label class="service-option" for="serviceSoftware">
+                  <input id="serviceSoftware" name="service" type="checkbox" value="Software Development" />
+                  <span>Software Development</span>
+                </label>
+                <label class="service-option" for="serviceDevops">
+                  <input id="serviceDevops" name="service" type="checkbox" value="Cloud &amp; DevOps Automation" />
+                  <span>Cloud &amp; DevOps Automation</span>
+                </label>
+                <label class="service-option" for="serviceIntegration">
+                  <input id="serviceIntegration" name="service" type="checkbox" value="Systems Integration" />
+                  <span>Systems Integration</span>
+                </label>
+                <label class="service-option" for="serviceModernization">
+                  <input id="serviceModernization" name="service" type="checkbox" value="Modernization &amp; Migration" />
+                  <span>Modernization &amp; Migration</span>
+                </label>
+                <label class="service-option" for="serviceSupport">
+                  <input id="serviceSupport" name="service" type="checkbox" value="Support &amp; Optimization" />
+                  <span>Support &amp; Optimization</span>
+                </label>
+                <label class="service-option" for="serviceTimekeeper">
+                  <input id="serviceTimekeeper" name="service" type="checkbox" value="Timekeeper Product" />
+                  <span>Timekeeper Product</span>
+                </label>
+                <label class="service-option" for="serviceNotSure">
+                  <input
+                    id="serviceNotSure"
+                    name="service"
+                    type="checkbox"
+                    value="Not sure yet — I'd like guidance"
+                    data-exclusive
+                  />
+                  <span>Not sure yet — I’d like guidance</span>
+                </label>
+                <label class="service-option" for="serviceOther">
+                  <input id="serviceOther" name="service" type="checkbox" value="Other / custom need" />
+                  <span>Other / custom need</span>
+                </label>
+              </div>
+
+              <p class="form-error" id="serviceError" role="alert" hidden>
+                Select at least one service, or choose “Not sure yet.”
+              </p>
+            </fieldset>
+
+            <label id="otherServiceLabel" hidden>
+              Please describe your custom need
               <input
+                id="otherService"
                 type="text"
                 name="other_service"
                 placeholder="Briefly describe your request"
+                disabled
               />
             </label>
 
