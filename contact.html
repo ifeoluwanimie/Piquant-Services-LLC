@@ -30,6 +30,7 @@
         </button>
 
         <div id="navMenu" class="nav-menu">
+          <a class="nav-link" href="index.html">Home</a>
           <a class="nav-link" href="services.html">Services</a>
           <a class="nav-link" href="products.html">Products</a>
           <a class="nav-link" href="about.html">About</a>
@@ -46,9 +47,9 @@
         <h1>Contact</h1>
         <p class="lead">Tell us what you’re building. We’ll respond within 1 business day.</p>
         <p class="muted">
-          Prefer email? Use your company email address to fill out the form below:
-          <!-- <strong>info@piquantservices.com</strong> -->
-          <!-- <span class="hint">(replace this text with your real email on your site)</span> -->
+          Prefer email? Contact us directly at
+          <a class="link" href="mailto:info@piquantservices.com">info@piquantservices.com</a>,
+          or fill out the form below.
         </p>
       </div>
     </section>
@@ -58,11 +59,10 @@
         <div class="card">
           <h2>Request a consultation</h2>
 
-          <!-- Formspree:
-               1) Create a form at formspree.io
-               2) Replace ACTION_URL with your Formspree endpoint (e.g., https://formspree.io/f/xxxxxxx)
+          <!-- FormSubmit sends consultation requests to the address in the action URL.
+               The recipient must confirm the one-time activation email before delivery begins.
           -->
-          <form class="form" action="https://formspree.io/f/xykwkwda" method="POST">
+          <form class="form" action="https://formsubmit.co/info@piquantservices.com" method="POST">
             <label>
               Full name
               <input name="name" type="text" autocomplete="name" required />
@@ -119,11 +119,15 @@
               </textarea>
             </label>
 
-            <!-- Basic anti-spam honeypot -->
-            <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <!-- FormSubmit options -->
+            <input type="hidden" name="_subject" value="New consultation request from piquantservices.com" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_url" value="https://piquantservices.com/contact.html" />
 
-            <!-- Optional: Formspree redirect after submit -->
-            <input type="hidden" name="_redirect" value="https://piquantservices.com/contact.html?sent=1" />
+            <!-- Basic anti-spam honeypot -->
+            <input type="text" name="_honey" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <input type="hidden" name="_next" value="https://piquantservices.com/contact.html?sent=1" />
 
             <button class="btn btn-primary" type="submit">Send message</button>
             <p class="muted small">
